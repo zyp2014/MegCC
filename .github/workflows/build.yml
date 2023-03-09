@@ -20,10 +20,15 @@ jobs:
       - name: Run build-wrapper
         run: |
           # build docker image, if built skip it
-          docker build script/docker -t megcc_manlylinux2014
+          python3 -m pip install cmake
+          sudo apt install ninja-build
+          ./third_party/prepare.sh
+          cd compiler
+          mkdir build
+          cd build
+          cmake .. -G Ninja
           # run release script
-          ./script/docker_release_megcc.sh
-          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ls
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ninja
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
