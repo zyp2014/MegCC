@@ -19,14 +19,12 @@ jobs:
         uses: SonarSource/sonarcloud-github-c-cpp@v1
       - name: Run build-wrapper
         run: |
-          git config --global user.email "zyp713249@163.com"
-          git config --global user.name "zyp2014"
-          ./third_party/prepare.sh
-          cd compiler & mkdir build $ cmake .. -G Ninja $ ninja
-          mkdir -p build_x86
-          cd build_x86
-          cmake ../test/kernel  -G Ninja
-          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ./megcc_test_run
+          cd /path/to/megcc
+          # build docker image, if built skip it
+          docker build script/docker -t megcc_manlylinux2014
+          # run release script
+          ./script/docker_release_megcc.sh
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ls
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
