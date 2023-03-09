@@ -22,6 +22,8 @@ jobs:
           # build docker image, if built skip it
           python3 -m pip install cmake
           sudo apt install ninja-build
+          git config --global user.email "zyp713249@163.com"
+          git config --global user.name "zyp2014"
           ./third_party/prepare.sh
           cd compiler
           mkdir build
