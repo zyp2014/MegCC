@@ -19,6 +19,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-c-cpp@v1
       - name: Run build-wrapper
         run: |
+          git config --global user.email "zyp713249@163.com"
+          git config --global user.name "zyp2014"
           ./third_party/prepare.sh
           cd compiler & mkdir build $ cmake .. -G Ninja $ ninja
           mkdir -p build_x86
