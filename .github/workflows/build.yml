@@ -19,7 +19,6 @@ jobs:
         uses: SonarSource/sonarcloud-github-c-cpp@v1
       - name: Run build-wrapper
         run: |
-          cd /path/to/megcc
           # build docker image, if built skip it
           docker build script/docker -t megcc_manlylinux2014
           # run release script
